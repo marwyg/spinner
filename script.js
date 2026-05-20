@@ -49,26 +49,24 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-document.addEventListener("touchend", (e) => {
-    // Stop the double-tap from triggering if they are typing in the input field
-    if (document.activeElement === nameInput) return;
-
-    const currentTime = new Date().getTime();
-    const tapLength = currentTime - lastTap;
+// The Smartphone Dual-Touch (Two-Finger Tap) Alternative
+document.addEventListener("touchstart", (e) => {
     
-    // Check if the time between taps is less than 300 milliseconds
-    if (tapLength < 300 && tapLength > 0) {
-        e.preventDefault(); 
+    // Check if exactly two fingers are touching the screen
+    if (e.touches.length === 2) {
         
-        // Exact same view-switching logic as your spacebar
+        // Stop it from triggering if they are typing in the input field
+        if (document.activeElement === nameInput) return;
+    
+        e.preventDefault(); // Prevents any weird scrolling or zooming
+        
+        // Your exact view-switching logic
         if (currentView === "spinner") {
             switchView("names");
         } else {
             switchView("spinner");
         }
     }
-    
-    lastTap = currentTime;
 });
 
 // Load names from textarea
