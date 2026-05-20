@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Spinner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Spinner View -->
+        <div id="spinner-view" class="view active">
+            <div class="wheel-container">
+                <!-- Magnifying glass display -->
+                <div class="magnifier-wrapper">
+                    <div id="magnifier-display" class="magnifier">
+                        <div class="magnifier-label">Teilnehmer</div>
+                        <div class="magnifier-name">-</div>
+                    </div>
+                </div>
+                
+                <div class="wheel-wrapper">
+                    <!-- The little triangle pointing down -->
+                    <div class="pointer"></div>
+                    <canvas id="wheelCanvas" width="500" height="500"></canvas>
+                </div>
+            </div>
+
+            <button id="spin-button">Los geht's!</button>
+        </div>
+
+        <!-- Name List View -->
+        <div id="names-view" class="view">
+            <h2>Namens Liste</h2>
+            <p class="hint">Füge einen namen per Zeile hinzu.</p>
+            <textarea id="name-input" placeholder="Alice&#10;Bob&#10;Charlie&#10;Diana">Alice
+                Bob
+                Charlie
+                Diana
+                Eve
+                Frank
+                Grace
+                Heidi
+            </textarea>
+            <button id="load-names-btn">Namen bestätigen</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+/* --- THEME SETTINGS --- */
+:root {
+    --bg-color: #f4f4f9;
+    --text-color: #333333;
+    --button-color: #e5b499;
+    --button-hover: #DF7C48;
+    --pointer-color: #ca705b;
+    --tab-bg: #e0e0e0;
+    --tab-active-bg: #f4f4f9;
+    --tab-border: #cccccc;
+}
+
+/* --- APP LAYOUT --- */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.app-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* --- VIEWS --- */
+.view {
+    display: none;
+    width: 100%;
+}
+
+.view.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* --- WHEEL & POINTER --- */
+.wheel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.magnifier-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.wheel-wrapper {
+    position: relative;
+    width: 500px;
+    max-width: 100%;
+    height: 500px;
+}
+
+.pointer {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 25px solid var(--pointer-color);
+    z-index: 1;
+}
+
+#wheelCanvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    /* The dramatic easing curve for the spin */
+    transition: transform 10s cubic-bezier(0.1, 0.9, 0.3, 1);
+}
+
+/* --- MAGNIFIER DISPLAY --- */
+.magnifier {
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    border: 3px solid var(--button-color);
+    border-radius: 15px;
+    padding: 20px;
+    width: 400px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.magnifier-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--button-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.magnifier.winner {
+    animation: winner-pulse 1s ease-in-out infinite;
+    border-color: #E9C46A;
+    background: linear-gradient(145deg, #fff9e6, #f5e6b3);
+    box-shadow: 0 0 30px #E9C46A, 0 0 60px rgba(233, 196, 106, 0.5);
+    z-index: 100;
+    position: relative;
+}
+
+@keyframes winner-pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px #E9C46A, 0 0 60px rgba(233, 196, 106, 0.5);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 50px #E9C46A, 0 0 100px rgba(233, 196, 106, 0.8);
+    }
+}
+
+.magnifier-label {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+}
+
+.magnifier-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--button-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+/* --- NAMES TAB --- */
+#names-tab h2 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+#names-tab .hint {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+#name-input {
+    width: 100%;
+    max-width: 400px;
+    height: 200px;
+    padding: 15px;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 2px solid var(--tab-border);
+    border-radius: 8px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+#name-input:focus {
+    outline: none;
+    border-color: var(--button-color);
+}
+
+/* --- BUTTONS --- */
+button {
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--button-hover);
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 550px) {
+    .wheel-wrapper {
+        height: 300px;
+        width: 300px;
+    }
+    
+    .magnifier {
+        width: 100%;
+        max-width: 350px;
+        height: 80px;
+    }
+    
+    .magnifier-name {
+        font-size: 1.5rem;
+    }
+    
+    #winner-display {
+        font-size: 1.8rem;
+    }
+    
+    button {
+        font-size: 1.2rem;
+        padding: 12px 30px;
+    }
+}
