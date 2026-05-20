@@ -49,6 +49,28 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
+document.addEventListener("touchend", (e) => {
+    // Stop the double-tap from triggering if they are typing in the input field
+    if (document.activeElement === nameInput) return;
+
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - lastTap;
+    
+    // Check if the time between taps is less than 300 milliseconds
+    if (tapLength < 300 && tapLength > 0) {
+        e.preventDefault(); 
+        
+        // Exact same view-switching logic as your spacebar
+        if (currentView === "spinner") {
+            switchView("names");
+        } else {
+            switchView("spinner");
+        }
+    }
+    
+    lastTap = currentTime;
+});
+
 // Load names from textarea
 function loadNamesFromInput() {
     const text = nameInput.value;
